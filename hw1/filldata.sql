@@ -31,12 +31,3 @@ values
     (1, "A"),
     (2, "B"),
     (3, "C");
-
-select * from Stations;
-
--- select distinct sc.trainId from Schedules as sc
--- inner join Stations as st on sc.time between "12:00:00" and "12:27:00"
--- inner join Trains as tr on tr.stationId = 1;
-
--- select distinct sc.trainId, sc.time from Schedules as sc
--- inner join Stations as st on sc.stationId = sc.stationId;

@@ -47,8 +47,3 @@ create table if not exists Tickets (
         foreign key (trainId) references Trains(trainId),
         foreign key (passengerId) references Passengers(passengerId)
 );
-
--- Funclionality
--- For clients
--- select sc.trainId from Schedules as sc
--- inner join Stations as st on st.stationId = sc.stationId

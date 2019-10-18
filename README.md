@@ -77,3 +77,17 @@ select distinct sc.trainId from Schedules as sc
 inner join Stations as st on sc.time between "12:00:00" and "12:27:00"
 inner join Trains as tr on tr.stationId = 1;
 ```
+
+- расписание поездов по конечной станции
+
+```
+select distinct sc.trainId, sc.time from Schedules as sc
+inner join Trains as tr on sc.trainId = tr.trainId && tr.stationId = 1;
+```
+
+- расписание поездов по станции отправления
+
+```
+select distinct sc.trainId, sc.time from Schedules as sc
+inner join Stations as st on st.stationId = sc.stationId && st.name = "B";
+```
