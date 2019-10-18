@@ -17,7 +17,7 @@ create table if not exists Stations (
 -- Trains
 create table if not exists Trains (
         trainId int not null,
-		stationId int not null,
+        stationId int not null,
         seatsNum int not null,
         primary key (trainId),
         foreign key (stationId) references Stations(stationId)
