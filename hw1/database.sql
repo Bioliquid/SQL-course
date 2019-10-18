@@ -1,26 +1,33 @@
--- Schedule
-create table if not exists Schedule (
-        stationId int not null,
-        trainId int not null,
-        time time not null,
-        primary key (stationId)
-);
+-- clear before use
+drop database if exists Hw1;
+create database if not exists Hw1;
+use Hw1;
 
--- Stations
-create table if not exists Stations (
-        stationId int auto_increment not null,
-        name nvarchar(100) not null,
-        primary key (stationId),
-        foreign key (stationId) references Schedule(stationId)
-);
+drop table if exists Schedules, Stations, Trains, Passengers, Tickets;
 
 -- Trains
 create table if not exists Trains (
         trainId int not null,
         stationId int not null,
         seatsNum int not null,
-        primary key (trainId),
-        foreign key (stationId) references Stations(stationId)
+        primary key (trainId, stationId)
+);
+
+-- Schedules
+create table if not exists Schedules (
+        stationId int not null,
+        trainId int not null,
+        time time not null,
+        primary key (stationId, trainId, time),
+        foreign key (trainId) references Trains(trainId)
+);
+
+-- Stations
+create table if not exists Stations (
+        stationId int not null,
+        name nvarchar(100) not null,
+        primary key (stationId),
+        foreign key (stationId) references Schedules(stationId)
 );
 
 -- Passengers
@@ -40,3 +47,8 @@ create table if not exists Tickets (
         foreign key (trainId) references Trains(trainId),
         foreign key (passengerId) references Passengers(passengerId)
 );
+
+-- Funclionality
+-- For clients
+-- select sc.trainId from Schedules as sc
+-- inner join Stations as st on st.stationId = sc.stationId
