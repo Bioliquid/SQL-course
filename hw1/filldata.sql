@@ -75,7 +75,7 @@ delimiter $$
 create procedure addSchedule(stationName nvarchar(100), trainId int, time time)
 begin
     insert into Schedules(stationId, trainId, time)
-	values ((select st.stationId from Stations as st where st.name = stationName), trainId, time);
+    values ((select st.stationId from Stations as st where st.name = stationName), trainId, time);
 end $$
 
 delimiter ;
@@ -90,7 +90,7 @@ begin
     -- Though we should be able to add stations before adding schedules, so...
     SET FOREIGN_KEY_CHECKS = 0;
     insert into Stations(name)
-	values (stationName);
+    values (stationName);
     SET FOREIGN_KEY_CHECKS = 1;
 end $$
 
@@ -103,7 +103,7 @@ delimiter $$
 create procedure addTrain(trainId int, stationId int, seatsNum int)
 begin
     insert into Trains(trainId, stationId, seatsNum)
-	values (trainId, stationId, seatsNum);
+    values (trainId, stationId, seatsNum);
 end $$
 
 delimiter ;

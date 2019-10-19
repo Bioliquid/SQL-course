@@ -61,11 +61,23 @@
 | 3 | 3 | 10:00:00 |
 
 ### Stations
+
 | stationId | name |
 | --- | --- |
 | 1 | A |
 | 2 | B |
 | 3 | C |
+
+### Tickets
+
+| ticketId | trainId | passengerId |
+| --- | --- | --- |
+| 1| 1 | 1 |
+| 2| 1 | null |
+| 3| 2 | 5 |
+| 4| 2 | null |
+| 5| 3 | 6 |
+| 6| 3 | 7 |
 
 ## Functionality
 
