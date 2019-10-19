@@ -42,7 +42,7 @@ create table if not exists Passengers (
 create table if not exists Tickets (
         ticketId int auto_increment not null,
         trainId int not null,
-        passengerId int,
+        passengerId int default null,
         primary key (ticketId),
         foreign key (trainId) references Trains(trainId),
         foreign key (passengerId) references Passengers(passengerId)

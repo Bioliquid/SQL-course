@@ -89,3 +89,53 @@ procedure findSchedule(station nvarchar(100)) -- filldata.sql
 select distinct sc.trainId, sc.time from Schedules as sc
 inner join Stations as st on st.stationId = sc.stationId && st.name = station;
 ```
+
+### For employees
+
+- добавление нового расписания
+
+```
+procedure addSchedule(stationName nvarchar(100), trainId int, time time) -- filldata.sql
+
+insert into Schedules(stationId, trainId, time)
+values ((select st.stationId from Stations as st where st.name = stationName), trainId, time);
+```
+
+- добавление новой станции
+
+```
+procedure addStation(stationName nvarchar(100)) -- filldata.sql
+
+-- This is inappropriate way to insert station
+-- Though we should be able to add stations before adding schedules, so...
+SET FOREIGN_KEY_CHECKS = 0;
+insert into Stations(name)
+values (stationName);
+SET FOREIGN_KEY_CHECKS = 1;
+```
+
+- добавление нового поезда
+
+```
+procedure addTrain(trainId int, stationId int, seatsNum int) -- filldata.sql
+
+insert into Trains(trainId, stationId, seatsNum)
+values (trainId, stationId, seatsNum);
+```
+
+- просмотр всех зарегистрированных на поезд пассажиров
+
+```
+procedure viewPeopleByTrain(trainId int) -- filldata.sql
+
+select pas.passengerId, pas.name, pas.lastName, pas.birthDate, tic.ticketId from Passengers as pas
+inner join Tickets as tic on tic.passengerId is not null && pas.passengerId = tic.passengerId && tic.trainId = trainId;
+```
+
+- просмотр всех поездов
+
+```
+procedure viewTrains() -- filldata.sql
+
+select * from Trains;
+```
