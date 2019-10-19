@@ -1,4 +1,3 @@
--- clear before use
 drop database if exists Hw1;
 create database if not exists Hw1;
 use Hw1;
@@ -24,7 +23,7 @@ create table if not exists Schedules (
 
 -- Stations
 create table if not exists Stations (
-        stationId int not null,
+        stationId int auto_increment not null,
         name nvarchar(100) not null,
         primary key (stationId),
         foreign key (stationId) references Schedules(stationId)
@@ -41,9 +40,10 @@ create table if not exists Passengers (
 
 -- Tickets
 create table if not exists Tickets (
+        ticketId int auto_increment not null,
         trainId int not null,
-        passengerId int not null,
-        primary key (trainId, passengerId),
+        passengerId int,
+        primary key (ticketId),
         foreign key (trainId) references Trains(trainId),
         foreign key (passengerId) references Passengers(passengerId)
 );

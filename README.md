@@ -30,11 +30,12 @@
 | passengerId | name | lastName | birthDate |
 | --- | --- | --- | --- |
 | 1 | Ivan | Ivanov| 1998-04-13 |
-| 2 | Sergey | Hodunov| 2007-10-27 |
-| 3 | Roman | Kramer| 1990-01-05 |
-| 4 | Anna | Smirnova| 1993-03-15 |
-| 5 | Alena | Kozlova| 1996-12-11 |
-| 6 | Alina | Stupina| 1994-09-17 |
+| 2 | Ivan | Ivanov| 1998-04-13 |
+| 3 | Sergey | Hodunov| 2007-10-27 |
+| 4 | Roman | Kramer| 1990-01-05 |
+| 5 | Anna | Smirnova| 1993-03-15 |
+| 6 | Alena | Kozlova| 1996-12-11 |
+| 7 | Alina | Stupina| 1994-09-17 |
 
 ### Trains
 
@@ -73,21 +74,18 @@
 - поиск поезда, проходящего от станции A до станции B в заданный промежуток времени
 
 ```
-select distinct sc.trainId from Schedules as sc
-inner join Stations as st on sc.time between "12:00:00" and "12:27:00"
-inner join Trains as tr on tr.stationId = 1;
-```
+procedure findTrain(startStation nvarchar(100), endStation nvarchar(100), startTime time, endTime time) -- filldata.sql
 
-- расписание поездов по конечной станции
-
-```
-select distinct sc.trainId, sc.time from Schedules as sc
-inner join Trains as tr on sc.trainId = tr.trainId && tr.stationId = 1;
+select distinct sc.trainId from Schedules as sc 
+inner join Stations as st on st.stationId = sc.stationId && st.name = startStation && sc.time between startTime and endTime
+inner join Trains as tr on tr.trainId = sc.trainId && tr.stationId = (select stationId from Stations as st2 where st2.name = endStation);
 ```
 
 - расписание поездов по станции отправления
 
 ```
+procedure findSchedule(station nvarchar(100)) -- filldata.sql
+
 select distinct sc.trainId, sc.time from Schedules as sc
-inner join Stations as st on st.stationId = sc.stationId && st.name = "B";
+inner join Stations as st on st.stationId = sc.stationId && st.name = station;
 ```
