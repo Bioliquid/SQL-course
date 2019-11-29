@@ -12,6 +12,13 @@ create table if not exists Trains (
         primary key (trainId, stationId)
 );
 
+-- Stations
+create table if not exists Stations (
+        stationId int auto_increment not null,
+        name nvarchar(100) not null,
+        primary key (stationId)
+);
+
 -- Schedules
 create table if not exists Schedules (
         stationId int not null,
@@ -20,13 +27,6 @@ create table if not exists Schedules (
         primary key (stationId, trainId, time),
         foreign key (trainId) references Trains(trainId),
         foreign key (stationId) references Stations(stationId)
-);
-
--- Stations
-create table if not exists Stations (
-        stationId int auto_increment not null,
-        name nvarchar(100) not null,
-        primary key (stationId)
 );
 
 -- Passengers
