@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS AudioTrackStore;
 --  OrderDate              Дата получения заказа
 --  DeliveryAddress        Адрес доставки заказа
 
-
+/*
 CREATE TABLE AudioTrackStore (
   ArtistId int NOT NULL,
   ArtistName varchar(120) NOT NULL,
@@ -38,4 +38,48 @@ CREATE TABLE AudioTrackStore (
   CustomerEmail varchar(60) NOT NULL,
   OrderDate date NOT NULL,
   DeliveryAddress varchar(70) NOT NULL
+);
+*/
+
+drop table if exists Artists, Albums, Tracks, Customers, Orders;
+
+create table Artists (
+	ArtistId int auto_increment not null,
+    ArtistName varchar(120) not null,
+    primary key (ArtistId)
+);
+
+create table Albums (
+	AlbumId int auto_increment not null,
+    ArtistId int not null,
+    AlbumTitle varchar(120) not null,
+    primary key (AlbumId),
+    foreign key (ArtistId) references Artists(ArtistId)
+);
+
+create table Tracks (
+	TrackId int auto_increment not null,
+    AlbumId int not null,
+    TrackName varchar(120) not null,
+    TrackLength bigint not null,
+    TrackGenre varchar(120) not null,
+    TrackPrice decimal(10, 2) not null,
+    primary key (TrackId),
+    foreign key (AlbumId) references Albums(AlbumId)
+);
+
+create table Customers (
+	CustomerId int auto_increment not null,
+    CustomerName varchar(60) not null,
+    CustomerEmail varchar(60) not null,
+    primary key (CustomerId)
+);
+
+create table Orders (
+	OrderId int auto_increment not null,
+    CustomerId int not null,
+    OrderDate date not null,
+    DeliveryAddress varchar(70) not null,
+    primary key (OrderId),
+    foreign key (CustomerId) references Customers(CustomerId)
 );
