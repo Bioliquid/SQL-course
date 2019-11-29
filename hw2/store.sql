@@ -77,9 +77,11 @@ create table Customers (
 
 create table Orders (
     OrderId int auto_increment not null,
+    TrackId int not null,
     CustomerId int not null,
     OrderDate date not null,
     DeliveryAddress varchar(70) not null,
     primary key (OrderId),
+    foreign key (TrackId) references Tracks (TrackId),
     foreign key (CustomerId) references Customers(CustomerId)
 );
