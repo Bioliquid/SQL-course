@@ -18,15 +18,15 @@ create table if not exists Schedules (
         trainId int not null,
         time time not null,
         primary key (stationId, trainId, time),
-        foreign key (trainId) references Trains(trainId)
+        foreign key (trainId) references Trains(trainId),
+        foreign key (stationId) references Stations(stationId)
 );
 
 -- Stations
 create table if not exists Stations (
         stationId int auto_increment not null,
         name nvarchar(100) not null,
-        primary key (stationId),
-        foreign key (stationId) references Schedules(stationId)
+        primary key (stationId)
 );
 
 -- Passengers
