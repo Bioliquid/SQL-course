@@ -44,13 +44,13 @@ CREATE TABLE AudioTrackStore (
 drop table if exists Artists, Albums, Tracks, Customers, Orders;
 
 create table Artists (
-	ArtistId int auto_increment not null,
+    ArtistId int auto_increment not null,
     ArtistName varchar(120) not null,
     primary key (ArtistId)
 );
 
 create table Albums (
-	AlbumId int auto_increment not null,
+    AlbumId int auto_increment not null,
     ArtistId int not null,
     AlbumTitle varchar(120) not null,
     primary key (AlbumId),
@@ -58,7 +58,7 @@ create table Albums (
 );
 
 create table Tracks (
-	TrackId int auto_increment not null,
+    TrackId int auto_increment not null,
     AlbumId int not null,
     TrackName varchar(120) not null,
     TrackLength bigint not null,
@@ -69,14 +69,14 @@ create table Tracks (
 );
 
 create table Customers (
-	CustomerId int auto_increment not null,
+    CustomerId int auto_increment not null,
     CustomerName varchar(60) not null,
     CustomerEmail varchar(60) not null,
     primary key (CustomerId)
 );
 
 create table Orders (
-	OrderId int auto_increment not null,
+    OrderId int auto_increment not null,
     CustomerId int not null,
     OrderDate date not null,
     DeliveryAddress varchar(70) not null,
