@@ -68,6 +68,13 @@ create table Tracks (
     foreign key (AlbumId) references Albums(AlbumId)
 );
 
+create table Invoices (
+    InvoiceId int auto_increment not null,
+	TrackId int not null,
+	primary key(InvoiceId),
+	foreign key (TrackId) references Tracks(TrackId)
+);
+
 create table Customers (
     CustomerId int auto_increment not null,
     CustomerName varchar(60) not null,
@@ -77,9 +84,11 @@ create table Customers (
 
 create table Orders (
     OrderId int auto_increment not null,
+    InvoiceId int not null,
     CustomerId int not null,
     OrderDate date not null,
     DeliveryAddress varchar(70) not null,
     primary key (OrderId),
+    foreign key (InvoiceId) references Invoices (InvoiceId),
     foreign key (CustomerId) references Customers(CustomerId)
 );

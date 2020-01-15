@@ -1,7 +1,3 @@
-drop database if exists Hw1;
-create database if not exists Hw1;
-use Hw1;
-
 
 -- 1). Имена всех пользователей.
 select DisplayName from Users;
